@@ -1,0 +1,86 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--init",
+        "--mount",
+        "type=bind,src=${workspaceFolder},dst=/projects/workspace",
+        "mcp/filesystem",
+        "/projects/workspace"
+      ]
+    },
+    "playwright": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--init", "--pull=always", "mcr.microsoft.com/playwright/mcp"]
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${input:CONTEXT7_API_KEY}"
+      }
+    },
+    "kubernetes": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--init",
+        "--network",
+        "host",
+        "--mount type=bind,src=${input:KUBECONFIG_PATH},dst=/home/appuser/.kube/config,readonly",
+        "--pull=always",
+        "mcp/kubernetes"
+      ]
+    },
+    "github-mcp": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp"
+    },
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e TRANSPORT_HOST=0.0.0.0",
+        "-e TRANSPORT_MODE=streamable-http",
+        "-e MCP_CORS_MODE=disabled",
+        "hashicorp/terraform-mcp-server:0.3"
+      ]
+    },
+    "perplexity": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@perplexity-ai/mcp-server"],
+      "env": {
+        "PERPLEXITY_API_KEY": "${input:PERPLEXITY_API_KEY}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "CONTEXT7_API_KEY",
+      "description": "Context7 API Key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "PERPLEXITY_API_KEY",
+      "description": "Perplexity API Key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "KUBECONFIG_PATH",
+      "description": "Kubeconfig Path",
+      "password": false
+    }
+  ]
+}

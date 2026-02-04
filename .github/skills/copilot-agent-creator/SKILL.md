@@ -1,0 +1,1 @@
+../../../lib/skills/copilot-agent-creator/SKILL.md

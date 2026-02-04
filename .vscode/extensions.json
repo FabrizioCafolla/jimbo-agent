@@ -1,0 +1,33 @@
+{
+  "recommendations": [
+    // GitHub & Copilot
+    "github.copilot",
+    "github.copilot-chat",
+    "github.vscode-pull-request-github",
+    "github.vscode-github-actions",
+    "eamodio.gitlens",
+
+    // Kubernetes & Containers
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+
+    // YAML & Terraform (infrastructure)
+    "redhat.vscode-yaml",
+    "hashicorp.terraform",
+
+    // Markdown (documentation)
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "bierner.markdown-mermaid",
+
+    // Code Quality & Formatting
+    "esbenp.prettier-vscode",
+    "timonwong.shellcheck",
+
+    // Development Tools
+    "ms-vscode.makefile-tools",
+    "mechatroner.rainbow-csv"
+  ],
+  "unwantedRecommendations": []
+}
